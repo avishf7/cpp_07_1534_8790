@@ -15,11 +15,12 @@ int main()
 void openF(string fName)
 {
 	fstream newFile(fName, ios::binary | ios::out);
+	int capacity = 10;
 
 	if (!newFile)
 		throw "faild to open file";
 
-	newFile.write((char*)&Student::emptyStudent._id, sizeof(int));
+	newFile.write((char*)&capacity, sizeof(int));
 	for (int i = 0; i < 10; ++i)
 		newFile.write((char*)&Student::emptyStudent, sizeof(Student));
 	newFile.close();
