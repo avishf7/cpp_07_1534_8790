@@ -19,6 +19,7 @@ void openF(string fName)
 	if (!newFile)
 		throw "faild to open file";
 
+	newFile.write((char*)&Student::emptyStudent._id, sizeof(int));
 	for (int i = 0; i < 10; ++i)
 		newFile.write((char*)&Student::emptyStudent, sizeof(Student));
 	newFile.close();
