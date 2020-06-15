@@ -279,10 +279,15 @@ Manage Manage::operator+(Manage& manageFile)
 
 Manage& Manage::operator=(Manage&& manage)
 {
-	_file = manage._file;
+	if (manage._file != _file)
+	{
+		if (_file != nullptr)
+			_file->clear();
+		_file = manage._file;
+		manage._file = nullptr;
+	}
 	_fileName = manage._fileName;
-	manage._file = nullptr;
-
+	
 	return *this;
 }
 
