@@ -4,7 +4,7 @@ using namespace std;
 
 const Student Student::emptyStudent;
 
-Student::Student(int id, const char* name, const char* lastName):_id(0),_name(new char[21]),_lastName(new char[21]),_courses(new char[6])
+Student::Student(int id, const char* name, const char* lastName) :_id(0), _name(new char[21]), _lastName(new char[21]), _courses(new char[6])
 {
 	//puts in all curses the character 'N'
 	strcpy(_courses, "NNNNN");
@@ -25,7 +25,7 @@ Student::~Student()
 	_name = _lastName = _courses = nullptr;
 }
 
-ostream& operator<<(ostream& out,const Student& st)
+ostream& operator<<(ostream& out, const Student& st)
 {
 	out << "id: " << st._id << endl
 		<< "first name: " << st._name << endl

@@ -12,12 +12,12 @@ struct Student
 	char* _courses;
 	static const Student emptyStudent;
 
-	friend std::ostream& operator << (std::ostream& out,const Student& st);
+	friend std::ostream& operator << (std::ostream& out, const Student& st);
 	Student(int id = 0, const char* name = "", const char* lastName = "");
 	~Student();
 };
 
-std::ostream& operator << (std::ostream& out,const Student& st);
+std::ostream& operator << (std::ostream& out, const Student& st);
 
 #endif // !STUDENT_H
 
