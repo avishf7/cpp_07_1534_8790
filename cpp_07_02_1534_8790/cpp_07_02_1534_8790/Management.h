@@ -1,3 +1,11 @@
+/*
+File: management.h
+Description:
+Course: 150018 C++ Workshop, Exercise 7, Question 2
+Author: Dan Zilberstein
+Students: eli iluz 311201354
+		& avishay farkash 205918790
+*/
 #ifndef _MANAGEMENT
 #define _MANAGEMENT
 
@@ -11,8 +19,8 @@ private:
 	std::string _fileName;
 	std::fstream* _file;
 
-	bool isExists(const int id) const;
-	char* getCourses(const int id) const;
+	bool isExists(const int id) ;
+	char* getCourses(const int id) ;
 public:
 	Manage():_file(nullptr){}
 	Manage(std::string fileName);
@@ -29,6 +37,7 @@ public:
 	void printStudent(const int id);
 	void printRgisteredStudent();
 	void printCurse(const int courseNum);
+	void clean();
 	void clear();
 
 
@@ -36,11 +45,11 @@ public:
 	Manage operator +(Manage& manageFile);
 	Manage& operator = (const Manage& other) = delete;
 	Manage& operator = (Manage&& manage);
-	void operator << (const Student& st);
+	friend Manage& operator << (Manage& out, const Student& st);
 	~Manage();
 
 };
 
-std::ofstream& operator << (std::ofstream& out, const Student& st);
+Manage& operator << (Manage& out, const Student& st);
 #endif // !_MANAGEMENT
 
