@@ -19,7 +19,7 @@ bool Manage::isExists(int id)
 		_file->open(_fileName, ios::binary | ios::in);
 
 	if (!_file)
-		throw  "faild to open file";
+		throw  "ERROR:faild to open file";
 
 	_file->read((char*)&max, sizeof(int));
 	if (id > max)
@@ -35,26 +35,29 @@ bool Manage::isExists(int id)
 	return idF;
 }
 
-char* Manage::getCourses(int id)
+const char* Manage::getCourses(int id)
 {
-	char* courses;
-	if(!(_file->is_open()))
-	_file->open(_fileName, ios::binary | ios::in);
+	char courses[26];
+	if (!(_file->is_open()))
+		_file->open(_fileName, ios::binary | ios::in);
 
 	if (!_file)
-		throw  "faild to open file";
+		throw  "ERROR:faild to open file";
 
-	_file->seekg(sizeof(int) + id * sizeof(Student) - sizeof(char*));
-	_file->read((char*)&courses, sizeof(char*));
+	_file->seekg(sizeof(int) + (id - 1) * sizeof(Student) + (sizeof(int) + 2 * sizeof(char[21])));
+	_file->read((char*)&courses, sizeof(char[6]));
 
 	_file->close();
 
 	return courses;
 }
 
-Manage::Manage(string fileName) : _file(new fstream), _fileName(fileName)
+Manage::Manage(string fileName) : _file(new fstream), _fileName(nullptr)
 {
-	OpenF(fileName);
+	_file->open(fileName, ios::binary, ios::in);
+	if (!_file)
+		throw"ERROR:file not exists";
+	_fileName = fileName;
 }
 
 Manage::Manage(Manage&& manage) : _file(manage._file), _fileName(manage._fileName)
@@ -63,46 +66,37 @@ Manage::Manage(Manage&& manage) : _file(manage._file), _fileName(manage._fileNam
 	manage._file = nullptr;
 }
 
-void Manage::OpenF(string fName)
-{
-	_file->open(fName, ios::binary | ios::out);
-	int capacity = 10;
 
-	if (!_file)
-		throw "faild to open file";
-
-	_file->write((char*)&capacity, sizeof(int));
-	for (int i = 0; i < 10; ++i)
-		_file->write((char*)&Student::emptyStudent, sizeof(Student));
-	_file->close();
-}
 
 void Manage::allocate(std::string fileName)
 {
+
 	if (!_file)
 		_file = new fstream;
-	OpenF(fileName);
+	_file->open(fileName, ios::binary, ios::in);
+	if (!_file)
+		throw"ERROR: file not exists";
 	_fileName = fileName;
 }
 
 void Manage::addStudent(const Student& st)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
 
 	int max;
+
 	if (isExists(st._id))
 		throw "the student already exists";
 
-	_file->open(_fileName, ios::binary | ios::in | ios::out);
-
-	if (!_file)
-		throw  "faild to open file";
+	//because isExists close the file i need to open again
+	_file->open(_fileName, ios::binary | ios::in);
 
 	_file->read((char*)&max, sizeof(int));
 	if (st._id > max)
 	{
 		_file->seekp(0, ios::end);
+		if (_file->eof())
+			cout << "WHYYYYYY!!!!";
 		//fill the binary file with empty student:
 		for (int i = 0; i < st._id - max - 1; ++i)
 			_file->write((char*)&Student::emptyStudent, sizeof(Student));
@@ -124,44 +118,39 @@ void Manage::addStudent(const Student& st)
 
 void Manage::delStudent(const int id)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
 
-	if (isExists(id))
-	{
+	//check if the student exists
+	if (!isExists(id))
+		throw "ERROR:student not found";
 
-		Student st;
+	Student st;
+	//because isExists close the file i need to open again
+	_file->open(_fileName, ios::binary | ios::out);
 
-		_file->open(_fileName, ios::binary | ios::out | ios::in);
+	//replace the del student with empty student
+	_file->seekp((id - 1) * sizeof(Student) + sizeof(int));
+	_file->write((char*)&Student::emptyStudent, sizeof(Student));
 
-		if (!_file)
-			throw  "faild to open file";
-		//activate the DTOR on the del student:
-		unsigned int g = id - 1;
-		_file->seekg((g) * sizeof(Student) + sizeof(int));
-		_file->read((char*)&st, sizeof(Student));
-		st.clear();
-		//replace the del student with empty student
-		_file->seekp(-((int)sizeof(Student)), ios::cur);
-		_file->write((char*)&Student::emptyStudent, sizeof(Student));
+	_file->close();
 
-		_file->close();
-	}
 }
 
 void Manage::updateCurse(const int id, const int courseNum)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
 
-	char* courses;
-	if (isExists(id))
-		throw "the student already exists";
+	//delCourses is parameter to delete the pointer that get form getCourses()
+	const char* delCourses = getCourses(id);
+	char courses[6];
+
+	if (!isExists(id))
+		throw "ERROR:student not found";
 
 	if (isRegistered(id, courseNum))
 		throw "the student already Registered to this course";
 
-	courses = getCourses(id);
+	strcpy(courses, delCourses);
 	courses[courseNum] = 'Y';
 
 	_file->open(_fileName, ios::binary | ios::out);
@@ -169,16 +158,15 @@ void Manage::updateCurse(const int id, const int courseNum)
 	if (!_file)
 		throw  "faild to open file";
 
-	_file->seekp(id * sizeof(Student) + sizeof(int) - sizeof(char*));
-	_file->write((char*)&courses, sizeof(char*));
+	_file->seekp((id - 1) * sizeof(Student) + sizeof(int) + (sizeof(int) + 2 * sizeof(char[21])));
+	_file->write((char*)&courses, sizeof(char[6]));
 
 	_file->close();
 }
 
 bool Manage::isRegistered(const int id, const int courseNum)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
 
 	return isExists(id) && getCourses(id)[courseNum] == 'Y';
 
@@ -186,57 +174,59 @@ bool Manage::isRegistered(const int id, const int courseNum)
 
 void Manage::printStudent(const int id)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
+
+	if (!isExists(id))
+		throw "ERROR:student not found";
+
 
 	Student st;
-	if (isExists(id))
-	{
 
-		_file->open(_fileName, ios::binary | ios::in);
-
-		if (!_file)
-			throw  "faild to open file";
-
-		_file->seekg((id - 1) * (int)sizeof(Student) + sizeof(int));
-		_file->read((char*)&st, sizeof(Student));
-
-		cout << st;
-
-		_file->close();
-	}
-}
-
-void Manage::printRgisteredStudent()
-{
-	if (!(*this))
-		throw "ERROR: file not found";
-
-	int max;
-	char* courses;
 	_file->open(_fileName, ios::binary | ios::in);
 
 	if (!_file)
 		throw  "faild to open file";
+
+	_file->seekg((id - 1) * (int)sizeof(Student) + sizeof(int));
+	_file->read((char*)&st, sizeof(Student));
+
+	cout << st;
+
+	_file->close();
+}
+
+void Manage::printRgisteredStudent()
+{
+	errorCheck();
+
+	int max;
+	//courses is parameter to delete the pointer that get form getCourses()
+	const char* courses;
+
+	_file->open(_fileName, ios::binary | ios::in);
+
+	if (!_file)
+		throw  "faild to open file";
+
 	_file->read((char*)&max, sizeof(int));
 	_file->close();
 
-	for (int i = 0, j = 1; i < max; ++i)
+	for (int i = 0, j = 1; i < max; ++i , delete[] courses)
 		if (strcmp(courses = getCourses(i + 1), "NNNNN"))
 		{
 			cout << j++ << "." << endl;
 			printStudent(i + 1);
-
-			courses = nullptr;
 		}
 }
 
 void Manage::printCurse(const int courseNum)
 {
-	if (!(*this))
-		throw "ERROR: file not found";
+	errorCheck();
 
+	//courses is parameter to delete the pointer that get form getCourses()
+	const char* courses;
 	int max;
+
 	_file->open(_fileName, ios::binary | ios::in);
 
 	if (!_file)
@@ -245,51 +235,42 @@ void Manage::printCurse(const int courseNum)
 	_file->read((char*)&max, sizeof(int));
 	_file->close();
 
-	for (int i = 0, j = 1; i < max; ++i)
-		if (getCourses(i + 1)[courseNum] == 'Y')
+	for (int i = 0, j = 1; i < max; ++i , delete[] courses)
+		if (((courses = getCourses(i + 1))[courseNum]) == 'Y')
 		{
 			cout << j++ << "." << endl;
 			printStudent(i);
 		}
 }
 
-void Manage::clean()
+void Manage::errorCheck()
 {
-	int max;
-	if (_file)
-	{
-		if (!(_file->is_open()))
-			_file->open(_fileName, ios::binary | ios::in);
-		_file->seekg(0);
-		_file->read((char*)&max, sizeof(int));
-		for (int i = 0; i < max; ++i)
-			try { delStudent(i + 1); }
-		catch (const char* msg) { cout << msg << endl; }
-		_file->close();
-	}
-	delete _file;
-}
+	//check if there is a file name in object
+	if (_fileName == "")
+		throw "ERROR:there is no file name";
 
-void Manage::clear()
-{
-	_file->clear();
+	//check if the file exists:
+	_file->open(_fileName, ios::binary | ios::in);
+
+	if (!_file)
+		throw  "ERROR:file not exists";
 }
 
 bool Manage::operator!() const
 {
-	return (!_file || _file->fail());
+	return _file->fail();
 }
 
 Manage Manage::operator+(Manage& manageFile)
 {
-	Student* st;
-	int max1, max2, max;
-	char* courses = new char[6];
+	Student st;
+	int max,tempMax;
 	Manage mergeFile;
-	
 
-	if (!(*this) || !manageFile)
+
+	if ((*this)._fileName == "" || manageFile._fileName == "")
 	{
+		openF("Empty.dat");
 		mergeFile.allocate("Empty.dat");
 		return mergeFile;
 	}
@@ -297,64 +278,63 @@ Manage Manage::operator+(Manage& manageFile)
 	string fName = _fileName;
 	fName.replace(fName.find("."), fName.size() - fName.find("."), " & ");
 	fName += manageFile._fileName;
+	openF(fName);
 	mergeFile.allocate(fName);
 
 	_file->open(_fileName, ios::binary | ios::in);
 
 	if (!(*this))
-		throw  "faild to open file";
+		return mergeFile;
 
 	manageFile._file->open(_fileName, ios::binary | ios::in);
 
 	if (!manageFile)
-		throw  "faild to open file";
+	{
+		_file->close;
+		return mergeFile;
+	}
 
-	_file->read((char*)&max1, sizeof(int));
+	_file->read((char*)&max, sizeof(int));
 
-	manageFile._file->read((char*)&max2, sizeof(int));
+	manageFile._file->read((char*)&tempMax, sizeof(int));
 
-	if (max1 > max2)
-		max = max1;
-	else
-		max = max2;
+	if (tempMax > max)
+		max = tempMax;
 
 	for (int i = 0; i < max; ++i)
 	{
-		st = new Student;
 		if (isExists(i + 1) && manageFile.isExists(i + 1))
 		{
 			_file->open(_fileName, ios::binary | ios::in);
 			_file->seekg((i * sizeof(Student)) + sizeof(int));
-			_file->read((char*)st, sizeof(Student));
+			_file->read((char*)&st, sizeof(Student));
 
-			strcpy(courses, st->_courses);
 			for (int j = 0; j < 5; ++j)
 				if (manageFile.isRegistered(i + 1, j))
-					courses[j] = 'Y';
+					st._courses[j] = 'Y';
 
 
-			mergeFile.addStudent(*(new Student((*st)._id, (const char*)(*st)._name, (const char*)(*st)._lastName, courses)));
+			mergeFile.addStudent(st);
 		}
 		else if (isExists(i + 1))
 		{
 			_file->open(_fileName, ios::binary | ios::in);
 			_file->seekg((i) * sizeof(Student) + sizeof(int));
-			_file->read((char*)st, sizeof(Student));
+			_file->read((char*)&st, sizeof(Student));
 
 
-			mergeFile.addStudent(*(new Student((*st)._id, (const char*)(*st)._name, (const char*)(*st)._lastName, (const char*)(*st)._courses)));
+			mergeFile.addStudent(st);
 		}
 		else if (manageFile.isExists(i + 1))
 		{
 			manageFile._file->open(_fileName, ios::binary | ios::in);
 			manageFile._file->seekg((i) * sizeof(Student) + sizeof(int));
-			manageFile._file->read((char*)st, sizeof(Student));
+			manageFile._file->read((char*)&st, sizeof(Student));
 
 
-			mergeFile.addStudent(*(new Student((*st)._id, (const char*)(*st)._name, (const char*)(*st)._lastName, (const char*)(*st)._courses)));
+			mergeFile.addStudent(st);
 		}
 	}
-	st = nullptr;
 	return mergeFile;
 }
 
@@ -363,7 +343,7 @@ Manage& Manage::operator=(Manage&& manage)
 	if (manage._file != _file)
 	{
 		if (_file != nullptr)
-			this->clean();
+			delete _file;
 		_file = manage._file;
 		manage._file = nullptr;
 	}
@@ -375,7 +355,9 @@ Manage& Manage::operator=(Manage&& manage)
 
 Manage::~Manage()
 {
-	clean();
+	if (_file->is_open())
+		_file->close();
+	delete _file;
 }
 
 Manage& operator<<(Manage& out, const Student& st)

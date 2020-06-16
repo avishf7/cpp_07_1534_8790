@@ -14,13 +14,15 @@ Students: eli iluz 311201354
 #include "Student.h"
 #include "fstream"
 
+
+
 class Manage {
 private:
 	std::string _fileName;
 	std::fstream* _file;
 
 	bool isExists(const int id) ;
-	char* getCourses(const int id) ;
+	const char* getCourses(const int id) ;
 public:
 	Manage():_file(nullptr){}
 	Manage(std::string fileName);
@@ -28,7 +30,6 @@ public:
 	Manage(const Manage&) = delete;
 	Manage(Manage&& manage);
 
-	void OpenF(const std::string fName);
 	void allocate(const std::string fileName);
 	void addStudent(const Student& st);
 	void delStudent(const int id);
@@ -37,9 +38,7 @@ public:
 	void printStudent(const int id);
 	void printRgisteredStudent();
 	void printCurse(const int courseNum);
-	void clean();
-	void clear();
-
+	void errorCheck();
 
 	bool operator !() const;
 	Manage operator +(Manage& manageFile);
@@ -51,5 +50,7 @@ public:
 };
 
 Manage& operator << (Manage& out, const Student& st);
+
+extern void openF(std::string fName);
 #endif // !_MANAGEMENT
 

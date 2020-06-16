@@ -11,6 +11,7 @@ Students: eli iluz 311201354
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include "Management.h"
 #include "Student.h"
 
@@ -51,6 +52,9 @@ const char* const menuOptionStrings[] = {
 	"print the details of all students that are registered in specific file(A or B or C).",
 	"print the details of all the students that are taking a specific course in specific file(A or B or C)."
 };
+
+
+void openF(std::string fName);
 
 #endif // !MAIN_H
 

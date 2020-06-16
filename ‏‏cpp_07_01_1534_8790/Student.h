@@ -7,14 +7,13 @@
 struct Student
 {
 	int _id;
-	char* _name;
-	char* _lastName;
-	char* _courses;
+	char _name[21];
+	char _lastName[21];
+	char _courses[6];
 	static const Student emptyStudent;
 
 	friend std::ostream& operator << (std::ostream& out,const Student& st);
-	Student(int id = 0, const char* name = "", const char* lastName = "");
-	~Student();
+	Student(int id = 0, const char name[] = "", const char lastName[] = "");
 };
 
 std::ostream& operator << (std::ostream& out,const Student& st);

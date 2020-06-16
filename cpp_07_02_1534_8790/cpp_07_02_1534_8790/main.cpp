@@ -10,11 +10,11 @@ Students: eli iluz 311201354
 #include "main.h"
 using namespace std;
 
-int main(void) {
+int main() {
 	char fileChoice;
 	int sNum, cNum, chosen;
 	string fileName;
-	Student* st;
+	Student st;
 	Manage fileA, fileB, fileC;
 
 	// Everything happens inside of this do-while loop, until the user
@@ -56,8 +56,9 @@ int main(void) {
 		case CREATE:
 			cout << "Enter file name: ";
 			cin >> fileName;
+			openF(fileName);
 
-			cout << "\nEnter on which file to execute(A or B): ";
+			cout << "\nEnter in which element allocate the new file:(A or B): ";
 			cin >> fileChoice;
 			switch (fileChoice)
 			{
@@ -76,11 +77,10 @@ int main(void) {
 			break;
 		case ADD://add to the file
 			bool isSuccess;
-			st = new Student();
 			do
 			{
 				isSuccess = true;
-				try { cin >> *st; }
+				try { cin >> st; }
 				catch (const char* msg)
 				{
 					cout << endl << msg << endl;
@@ -93,11 +93,11 @@ int main(void) {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA << *st; }
+				try { fileA << st; }
 				catch (const char* msg) { cout << msg; }
 				break;
 			case 'B':
-				try { fileB << *st; }
+				try { fileB << st; }
 				catch (const char* msg) { cout << msg; }
 				break;
 			default:
@@ -265,13 +265,21 @@ int main(void) {
 		default:
 			cout << "ERROR: invalid choice\n";
 		}
-		if (!(!fileA))
-			fileA.clear();
-		if (!(!fileB))
-			fileB.clear();
-		if (!(!fileC))
-			fileC.clear();
 	} while (chosen != EXIT_MENU);
 
 	return 0;
+}
+
+void openF(string fName)
+{
+	fstream newFile(fName, ios::binary | ios::out);
+	int capacity = 10;
+
+	if (!newFile)
+		throw "faild to open file";
+
+	newFile.write((char*)&capacity, sizeof(int));
+	for (int i = 0; i < 10; ++i)
+		newFile.write((char*)&Student::emptyStudent, sizeof(Student));
+	newFile.close();
 }

@@ -12,32 +12,6 @@ using namespace std;
 
 const Student Student::emptyStudent;
 
-void Student::clear()
-{
-	delete[] _name;
-	delete[] _lastName;
-	delete[] _courses;
-	_name = _lastName = _courses = nullptr;
-}
-
-Student::Student(int id, const char* name, const char* lastName, const char* courses) :_id(id), _name(new char[21]), _lastName(new char[21]), _courses(new char[6])
-{
-	//puts in all curses the character 'N'
-	strcpy(_courses, courses);
-
-	if (strlen(name) > 21 || strlen(lastName) > 21)
-		throw "the name is out of range";
-
-	strcpy(_name, name);
-	strcpy(_lastName, lastName);
-
-}
-
-Student::~Student()
-{
-	clear();
-}
-
 std::istream& operator>>(std::istream& in, Student& st)
 {
 	cout << "Enter student details:" << endl;
@@ -75,4 +49,16 @@ ostream& operator<<(ostream& out, const Student& st)
 		out << "[" << i + 1 << "] - " << st._courses[i] << endl;
 
 	return out;
+}
+
+Student::Student(int id, const char name[], const char lastName[]) :_id(id)
+{
+	//puts in all curses the character 'N'
+	strcpy(_courses, "NNNNN");
+
+	if (strlen(name) > 21 || strlen(lastName) > 21)
+		throw "the name is out of range";
+
+	strcpy(_name, name);
+	strcpy(_lastName, lastName);
 }
