@@ -1,0 +1,664 @@
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 1
+
+Enter file name: A.dat
+
+Enter in which element allocate the new file:(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 1
+
+Enter file name: B.dat
+
+Enter in which element allocate the new file:(A or B): B
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - a
+last name - s
+curses(Y or N):
+[1] - N
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Enter on which file to execute(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 7
+
+enter number of student to print:
+1
+
+Enter on which file to execute(A or B or C): A
+id: 1
+first name: a
+last name: s
+curses:
+[1] - N
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 4
+
+enter number of student:
+1
+enter number of course:
+1
+
+Enter on which file to execute(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 7
+
+enter number of student to print:
+1
+
+Enter on which file to execute(A or B or C): A
+id: 1
+first name: a
+last name: s
+curses:
+[1] - Y
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 3
+
+enter number of student to delete:
+1
+
+Enter on which file to execute(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 7
+
+enter number of student to print:
+1
+
+Enter on which file to execute(A or B or C): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - a
+last name - s
+curses(Y or N):
+[1] - Y
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Enter on which file to execute(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - s
+last name - d
+curses(Y or N):
+[1] - N
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - N
+
+Enter on which file to execute(A or B): B
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 13
+first name - e
+last name - r
+curses(Y or N):
+[1] - N
+[2] - N
+[3] - N
+[4] - N
+[5] - N
+
+Enter on which file to execute(A or B): A
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 99999
+
+ERROR: id out of range
+
+Enter student details:
+
+id(1 - 999) - 13
+first name - q
+last name - w
+curses(Y or N):
+[1] - D
+
+Enter student details:
+
+id(1 - 999) - 13
+first name - q
+last name - w
+curses(Y or N):
+[1] - Y
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - Y
+
+Enter on which file to execute(A or B): B
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 8
+
+
+Enter on which file to execute(A or B or C): A
+1.
+id: 1
+first name: a
+last name: s
+curses:
+[1] - Y
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 8
+
+
+Enter on which file to execute(A or B or C): B
+1.
+id: 1
+first name: s
+last name: d
+curses:
+[1] - N
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - N
+2.
+id: 13
+first name: q
+last name: w
+curses:
+[1] - Y
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - Y
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 6
+
+name of C(A + B) - A & B.dat
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 8
+
+
+Enter on which file to execute(A or B or C): C
+1.
+id: 1
+first name: a
+last name: s
+curses:
+[1] - Y
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - N
+2.
+id: 13
+first name: e
+last name: r
+curses:
+[1] - Y
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - Y
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 5
+
+enter number of student:
+13
+enter number of course:
+1
+
+Enter on which file to execute(A or B): A
+
+The student is not taking the course
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 5
+
+enter number of student:
+13
+enter number of course:
+1
+
+Enter on which file to execute(A or B): B
+
+The student is taking the course
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 9
+
+enter number of course:
+3
+
+Enter on which file to execute(A or B or C): B
+1.
+id: 1
+first name: s
+last name: d
+curses:
+[1] - N
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - N
+2.
+id: 13
+first name: q
+last name: w
+curses:
+[1] - Y
+[2] - Y
+[3] - Y
+[4] - Y
+[5] - Y
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 7
+
+enter number of student to print:
+7
+
+Enter on which file to execute(A or B or C): B
+Failad to print.
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 2
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - d
+last name - f
+curses(Y or N):
+[1] - N
+[2] - N
+[3] - n
+
+ERROR: invalid choice
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - d
+last name - f
+curses(Y or N):
+[1] - N
+[2] - N
+[3] - N
+[4] - N
+[5] - N
+
+Enter on which file to execute(A or B): B
+Failad to add the student.
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 3
+
+enter number of student to delete:
+3
+
+Enter on which file to execute(A or B): B
+Failad to delete the student.
+
+Enter student details:
+
+id(1 - 999) - 1
+first name - a
+last name - s
+curses(Y or N):
+[1] - Y
+[2] - Y
+[3] - N
+[4] - N
+[5] - N
+
+Enter on which file to execute(A or B): A
+Failad to add the student.
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 4
+
+enter number of student:
+1
+enter number of course:
+1
+
+Enter on which file to execute(A or B): B
+Failad to uptate the student course.
+
+Menu options:
+
+          0 -- exit the program
+          1 -- create file(to A or B).
+          2 -- add Student to a file(A OR B).
+          3 -- delete student from file(A OR B).
+          4 -- update the student courses in spcific file(A or B).
+          5 -- Check if student is registered to spcific course in spcific file(A or B).
+          6 -- put the sum of File A and File B in File C.
+          7 -- print the details of a specific student in specific file(A or B or C).
+          8 -- print the details of all students that are registered in specific file(A or B or C).
+          9 -- print the details of all the students that are taking a specific course in specific file(A or B or C).
+
+Please choose a menu option: 0
+
+04:20 ‏17/‏06/‏2020

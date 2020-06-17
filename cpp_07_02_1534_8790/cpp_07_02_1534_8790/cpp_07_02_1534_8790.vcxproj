@@ -132,6 +132,12 @@
     <ClInclude Include="Student.h" />
     <ClInclude Include="Management.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="A &amp; B.dat" />
+    <None Include="A.dat" />
+    <None Include="B.dat" />
+    <None Include="C.dat" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

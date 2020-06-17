@@ -1,8 +1,0 @@
-﻿  Management.cpp
-C:\Users\אבישי פרקש\OneDrive - g.jct.ac.il\מסמכים\GitHub\--cpp_07_1534_8790\cpp_07_02_1534_8790\cpp_07_02_1534_8790\Management.cpp(57,2): error C3861: 'OpenF': identifier not found
-C:\Users\אבישי פרקש\OneDrive - g.jct.ac.il\מסמכים\GitHub\--cpp_07_1534_8790\cpp_07_02_1534_8790\cpp_07_02_1534_8790\Management.cpp(73,2): error C3861: 'OpenF': identifier not found
-C:\Users\אבישי פרקש\OneDrive - g.jct.ac.il\מסמכים\GitHub\--cpp_07_1534_8790\cpp_07_02_1534_8790\cpp_07_02_1534_8790\Management.cpp(299,114): error C2661: 'Student::Student': no overloaded function takes 4 arguments
-C:\Users\אבישי פרקש\OneDrive - g.jct.ac.il\מסמכים\GitHub\--cpp_07_1534_8790\cpp_07_02_1534_8790\cpp_07_02_1534_8790\Management.cpp(308,134): error C2661: 'Student::Student': no overloaded function takes 4 arguments
-  main.cpp
-  Generating Code...
-C:\Users\אבישי פרקש\OneDrive - g.jct.ac.il\מסמכים\GitHub\--cpp_07_1534_8790\cpp_07_02_1534_8790\cpp_07_02_1534_8790\Management.cpp(317,134): error C2661: 'Student::Student': no overloaded function takes 4 arguments

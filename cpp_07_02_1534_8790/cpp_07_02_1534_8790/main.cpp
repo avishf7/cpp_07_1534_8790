@@ -13,6 +13,7 @@ using namespace std;
 int main() {
 	char fileChoice;
 	int sNum, cNum, chosen;
+	bool isSuccess;
 	string fileName;
 	Student st;
 	Manage fileA, fileB, fileC;
@@ -40,12 +41,12 @@ int main() {
 		}
 		cout << endl;
 
-		
+
 		cout << "Please choose a menu option: ";
 		cin >> chosen;
 		// After the user has input an int, it is cast to a
 		//   MenuOption variable.
-		
+
 
 
 		cout << endl;
@@ -56,6 +57,7 @@ int main() {
 		case CREATE:
 			cout << "Enter file name: ";
 			cin >> fileName;
+			
 			openF(fileName);
 
 			cout << "\nEnter in which element allocate the new file:(A or B): ";
@@ -63,12 +65,16 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.allocate(fileName); }
-				catch (const char* msg) { cout << msg; }
+				fileA.allocate(fileName);
+
+				if (!fileA)
+					cout << "Failad to allocate." << endl;
 				break;
 			case 'B':
-				try { fileB.allocate(fileName); }
-				catch (const char* msg) { cout << msg; }
+				fileB.allocate(fileName);
+
+				if (!fileB)
+					cout << "Failad to allocate." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -76,7 +82,6 @@ int main() {
 			}
 			break;
 		case ADD://add to the file
-			bool isSuccess;
 			do
 			{
 				isSuccess = true;
@@ -86,6 +91,8 @@ int main() {
 					cout << endl << msg << endl;
 					isSuccess = false;
 					cin.clear();
+					char tempStr[1000000];
+					cin.getline(tempStr, 1000000);
 				}
 			} while (!isSuccess);
 			cout << "\nEnter on which file to execute(A or B): ";
@@ -93,12 +100,16 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA << st; }
-				catch (const char* msg) { cout << msg; }
+				fileA << st;
+
+				if (!fileA)
+					cout << "Failad to add the student." << endl;
 				break;
 			case 'B':
-				try { fileB << st; }
-				catch (const char* msg) { cout << msg; }
+				fileB << st;
+
+				if (!fileB)
+					cout << "Failad to add the student." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -115,12 +126,16 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.delStudent(sNum); }
-				catch (const char* msg) { cout << msg; }
+				fileA.delStudent(sNum);
+
+				if (!fileA)
+					cout << "Failad to delete the student." << endl;
 				break;
 			case 'B':
-				try { fileB.delStudent(sNum); }
-				catch (const char* msg) { cout << msg; }
+				fileB.delStudent(sNum);
+
+				if (!fileB)
+					cout << "Failad to delete the student." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -139,12 +154,16 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.updateCurse(sNum, cNum); }
-				catch (const char* msg) { cout << msg; }
+				fileA.updateCurse(sNum, cNum);
+
+				if (!fileA)
+					cout << "Failad to uptate the student course." << endl;
 				break;
 			case 'B':
-				try { fileB.updateCurse(sNum, cNum); }
-				catch (const char* msg) { cout << msg; }
+				fileB.updateCurse(sNum, cNum);
+
+				if (!fileB)
+					cout << "Failad to uptate the student course." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -160,23 +179,28 @@ int main() {
 			cout << "\nEnter on which file to execute(A or B): ";
 			cin >> fileChoice;
 
+			bool isTrue;
 			switch (fileChoice)
 			{
 			case 'A':
-				try {
-					cout << "The student is"
-						<< (fileA.isRegistered(sNum, cNum) ? " " : " not ")
-						<< "taking the course\n";
-				}
-				catch (const char* msg) { cout << msg; }
+				isTrue = fileA.isRegistered(sNum, cNum);
+
+				if (!fileA)
+					cout << "Failad to check." << endl;
+				else
+					cout << endl << "The student is"
+					<< (isTrue ? " " : " not ")
+					<< "taking the course\n";
 				break;
 			case 'B':
-				try {
+				isTrue = fileB.isRegistered(sNum, cNum);
+
+				if (!fileB)
+					cout << "Failad to check." << endl;
+				else
 					cout << "The student is"
-						<< (fileB.isRegistered(sNum, cNum) ? " " : " not ")
-						<< "taking the course\n";
-				}
-				catch (const char* msg) { cout << msg; }
+					<< (isTrue ? " " : " not ")
+					<< "taking the course\n";
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -184,8 +208,15 @@ int main() {
 			}
 			break;
 		case ADD_TWO_ELEMENTS://put the sum of File A and File B in File C
-			try { fileC = fileA + fileB; }
-			catch (const char* msg) { cout << msg; }
+			fileC = fileA + fileB;
+			if (!fileC)
+			{
+				cout << "Failed to merge the files";
+				fileA.clear();
+				fileB.clear();
+			}
+			else
+				cout << "name of C(A + B) - " << fileC._fileName;
 			break;
 		case PRINT://print the details of a specific student in specific file
 			cout << "enter number of student to print:\n";
@@ -197,16 +228,22 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.printStudent(sNum); }
-				catch (const char* msg) { cout << msg; }
+				fileA.printStudent(sNum);
+
+				if (!fileA)
+					cout << "Failad to print." << endl;
 				break;
 			case 'B':
-				try { fileB.printStudent(sNum); }
-				catch (const char* msg) { cout << msg; }
+				fileB.printStudent(sNum);
+
+				if (!fileB)
+					cout << "Failad to print." << endl;
 				break;
 			case 'C':
-				try { fileC.printStudent(sNum); }
-				catch (const char* msg) { cout << msg; }
+				fileC.printStudent(sNum);
+
+				if (!fileB)
+					cout << "Failad to print." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -220,16 +257,22 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.printRgisteredStudent(); }
-				catch (const char* msg) { cout << msg; }
+				fileA.printRgisteredStudent();
+
+				if (!fileA)
+					cout << "Failad to print." << endl;
 				break;
 			case 'B':
-				try { fileB.printRgisteredStudent(); }
-				catch (const char* msg) { cout << msg; }
+				fileB.printRgisteredStudent();
+
+				if (!fileB)
+					cout << "Failad to print." << endl;
 				break;
 			case 'C':
-				try { fileC.printRgisteredStudent(); }
-				catch (const char* msg) { cout << msg; }
+				fileC.printRgisteredStudent();
+
+				if (!fileC)
+					cout << "Failad to print." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -246,16 +289,22 @@ int main() {
 			switch (fileChoice)
 			{
 			case 'A':
-				try { fileA.printCurse(cNum); }
-				catch (const char* msg) { cout << msg; }
+				fileA.printCurse(cNum);
+
+				if (!fileA)
+					cout << "Failad to print." << endl;
 				break;
 			case 'B':
-				try { fileB.printCurse(cNum); }
-				catch (const char* msg) { cout << msg; }
+				fileB.printCurse(cNum);
+
+				if (!fileB)
+					cout << "Failad to print." << endl;
 				break;
 			case 'C':
-				try { fileC.printCurse(cNum); }
-				catch (const char* msg) { cout << msg; }
+				fileC.printCurse(cNum);
+
+				if (!fileC)
+					cout << "Failad to print." << endl;
 				break;
 			default:
 				cout << "ERROR: invalid choice\n";
@@ -264,6 +313,8 @@ int main() {
 			break;
 		default:
 			cout << "ERROR: invalid choice\n";
+			cin.clear();
+			cin.get();
 		}
 	} while (chosen != EXIT_MENU);
 

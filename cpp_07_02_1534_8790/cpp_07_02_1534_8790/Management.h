@@ -17,13 +17,12 @@ Students: eli iluz 311201354
 
 
 class Manage {
-private:
+
+public:
 	std::string _fileName;
 	std::fstream* _file;
+	bool success = true;;
 
-	bool isExists(const int id) ;
-	const char* getCourses(const int id) ;
-public:
 	Manage():_file(nullptr){}
 	Manage(std::string fileName);
 
@@ -38,7 +37,8 @@ public:
 	void printStudent(const int id);
 	void printRgisteredStudent();
 	void printCurse(const int courseNum);
-	void errorCheck();
+	bool errorCheck();
+	void clear();
 
 	bool operator !() const;
 	Manage operator +(Manage& manageFile);
@@ -46,6 +46,10 @@ public:
 	Manage& operator = (Manage&& manage);
 	friend Manage& operator << (Manage& out, const Student& st);
 	~Manage();
+
+private:
+	bool isExists(const int id);
+	const char* getCourses(const int id);
 
 };
 

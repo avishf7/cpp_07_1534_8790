@@ -1,5 +1,15 @@
+/*
+File: main.cpp
+Description:
+Course: 150018 C++ Workshop, Exercise 7, Question 1
+Author: Dan Zilberstein
+Students: eli iluz 311201354
+		& avishay farkash 205918790
+*/
+
 #include "main.h"
 using namespace std;
+
 int main()
 {
 	string fileName;

@@ -19,7 +19,7 @@ std::istream& operator>>(std::istream& in, Student& st)
 	in >> st._id;
 
 	if (st._id < 1 || st._id > 999)
-		throw "ERROR: id out of range";
+		throw "ERROR: id out of range\n";
 
 	cout << "first name - ";
 	in >> setw(21) >> st._name;
