@@ -159,7 +159,6 @@ void Manage::delStudent(const int id)
 		return;
 
 	success = false;
-	Student st;
 	//because isExists close the file i need to open again
 	_file->open(_fileName, ios::binary | ios::out | ios::in);
 
