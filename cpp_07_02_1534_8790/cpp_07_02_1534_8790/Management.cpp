@@ -10,64 +10,18 @@ Students: eli iluz 311201354
 #pragma warning(disable:4996)
 using namespace std;
 
-bool Manage::isExists(int id)
-{
-	success = false;
-	int max, idF;
-	if (_file->is_open())
-		_file->seekg(0);
-	else
-		_file->open(_fileName, ios::binary | ios::in);
-
-	if (!_file)
-		return false;
-
-	_file->read((char*)&max, sizeof(int));
-	if (id > max)
-	{
-		_file->close();
-		success = _file->good();
-		return  false;
-	}
-
-	_file->seekg((id - 1) * sizeof(Student) + sizeof(int));
-	_file->read((char*)&idF, sizeof(int));
-
-	_file->close();
-
-	if (idF != id && idF != 0)
-		throw "ERROR:the id in the file is illegal";
 
 
 
-	return (success = _file->good()) && idF;
-}
 
-const char* Manage::getCourses(int id)
-{
-	success = false;
-	char* courses = new char[6];
-	if (!(_file->is_open()))
-		_file->open(_fileName, ios::binary | ios::in);
-
-	if (!_file)
-		return nullptr;
-
-	_file->seekg(sizeof(int) + (id - 1) * sizeof(Student) + (sizeof(int) + 2 * sizeof(char[21])));
-	_file->read((char*)courses, sizeof(char[6]));
-
-	_file->close();
-
-	success = _file->good();
-	return courses;
-}
-
-Manage::Manage(string fileName) : _file(new fstream), _fileName(nullptr)
+Manage::Manage(string fileName) : _file(new fstream), _fileName("")
 {
 	_file->open(fileName, ios::binary, ios::in);
 	if (success = _file->good())
-		return;
-	_fileName = fileName;
+	{
+		_file->close();
+		_fileName = fileName;
+	}
 }
 
 Manage::Manage(Manage&& manage) : _file(manage._file), _fileName(manage._fileName)
@@ -84,14 +38,14 @@ void Manage::allocate(std::string fileName)
 		_file = new fstream;
 	_file->open(fileName, ios::binary | ios::in);
 
-	if (!(success = _file))
+	if (!(success = _file->good()))
 	{
 		_file->close();
 		return;
 	}
 
 	_file->close();
-	_fileName = fileName;
+		_fileName = fileName;
 }
 
 void Manage::addStudent(const Student& st)
@@ -111,18 +65,15 @@ void Manage::addStudent(const Student& st)
 	success = false;
 	int max;
 
-	//because isExists close the file i need to open again
 	_file->open(_fileName, ios::binary | ios::in | ios::out);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	_file->read((char*)&max, sizeof(int));
 	if (st._id > max)
 	{
 		_file->seekp(0, ios::end);
-		if (_file->eof())
-			cout << "WHYYYYYY!!!!";
 		//fill the binary file with empty student:
 		for (int i = 0; i < st._id - max - 1; ++i)
 			_file->write((char*)&Student::emptyStudent, sizeof(Student));
@@ -159,10 +110,10 @@ void Manage::delStudent(const int id)
 		return;
 
 	success = false;
-	//because isExists close the file i need to open again
+
 	_file->open(_fileName, ios::binary | ios::out | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	//replace the del student with empty student
@@ -189,7 +140,7 @@ void Manage::updateCurse(const int id, const int courseNum)
 	{
 		success = false;
 		return;
-	 }
+	}
 
 	if (!(*this))
 		return;
@@ -209,7 +160,7 @@ void Manage::updateCurse(const int id, const int courseNum)
 
 	_file->open(_fileName, ios::binary | ios::out | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	_file->seekp((id - 1) * sizeof(Student) + sizeof(int) + (sizeof(int) + 2 * sizeof(char[21])));
@@ -253,7 +204,7 @@ void Manage::printStudent(const int id)
 
 	_file->open(_fileName, ios::binary | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	_file->seekg((id - 1) * (int)sizeof(Student) + sizeof(int));
@@ -277,7 +228,7 @@ void Manage::printRgisteredStudent()
 
 	_file->open(_fileName, ios::binary | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	_file->read((char*)&max, sizeof(int));
@@ -319,7 +270,7 @@ void Manage::printCurse(const int courseNum)
 
 	_file->open(_fileName, ios::binary | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 		return;
 
 	_file->read((char*)&max, sizeof(int));
@@ -347,23 +298,7 @@ void Manage::printCurse(const int courseNum)
 		}
 }
 
-bool Manage::errorCheck()
-{
-	success = false;
-	//check if there is a file name in object
-	if (_fileName == "")
-		return success;
 
-	//check if the file exists:
-	_file->open(_fileName, ios::binary | ios::in);
-
-	if (!_file)
-		return success;
-
-	_file->close();
-
-	return (success = true);
-}
 
 void Manage::clear()
 {
@@ -387,7 +322,7 @@ Manage Manage::operator+(Manage& manageFile)
 
 	_file->open(_fileName, ios::binary | ios::in);
 
-	if (!_file)
+	if (_file->fail())
 	{
 		_file->close();
 		return mergeFile;
@@ -395,7 +330,7 @@ Manage Manage::operator+(Manage& manageFile)
 
 	manageFile._file->open(manageFile._fileName, ios::binary | ios::in);
 
-	if (!manageFile._file)
+	if (!manageFile._file->fail())
 	{
 		_file->close();
 		return mergeFile;
@@ -457,7 +392,7 @@ Manage& Manage::operator=(Manage&& manage)
 {
 	if (manage._file != _file)
 	{
-		if (_file != nullptr)
+		if (_file)
 			delete _file;
 		_file = manage._file;
 		manage._file = nullptr;
@@ -480,4 +415,74 @@ Manage& operator<<(Manage& out, const Student& st)
 {
 	out.addStudent(st);
 	return out;
+}
+
+bool Manage::isExists(int id)
+{
+	success = false;
+	int max, idF;
+	if (_file->is_open())
+		_file->seekg(0);
+	else
+		_file->open(_fileName, ios::binary | ios::in);
+
+	if (_file->fail())
+		return false;
+
+	_file->read((char*)&max, sizeof(int));
+	if (id > max)
+	{
+		_file->close();
+		success = _file->good();
+		return  false;
+	}
+
+	_file->seekg((id - 1) * sizeof(Student) + sizeof(int));
+	_file->read((char*)&idF, sizeof(int));
+
+	_file->close();
+
+	if (idF != id && idF != 0)
+		throw "ERROR:the id in the file is illegal";
+
+
+
+	return (success = _file->good()) && idF;
+}
+
+bool Manage::errorCheck()
+{
+	success = false;
+	//check if there is a file name in object
+	if (_fileName == "")
+		return success;
+
+	//check if the file exists:
+	_file->open(_fileName, ios::binary | ios::in);
+
+	if (_file->fail())
+		return success;
+
+	_file->close();
+
+	return (success = true);
+}
+
+const char* Manage::getCourses(int id)
+{
+	success = false;
+	char* courses = new char[6];
+	if (!(_file->is_open()))
+		_file->open(_fileName, ios::binary | ios::in);
+
+	if (_file->fail())
+		return nullptr;
+
+	_file->seekg(sizeof(int) + (id - 1) * sizeof(Student) + (sizeof(int) + 2 * sizeof(char[21])));
+	_file->read((char*)courses, sizeof(char[6]));
+
+	_file->close();
+
+	success = _file->good();
+	return courses;
 }

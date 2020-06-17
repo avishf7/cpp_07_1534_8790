@@ -37,7 +37,6 @@ public:
 	void printStudent(const int id);
 	void printRgisteredStudent();
 	void printCurse(const int courseNum);
-	bool errorCheck();
 	void clear();
 
 	bool operator !() const;
@@ -49,7 +48,9 @@ public:
 
 private:
 	bool isExists(const int id);
+	bool errorCheck();
 	const char* getCourses(const int id);
+
 
 };
 
