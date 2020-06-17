@@ -320,6 +320,8 @@ Manage Manage::operator+(Manage& manageFile)
 	if (!errorCheck() || !(manageFile.errorCheck()))
 		return mergeFile;
 
+	success = false;
+
 	_file->open(_fileName, ios::binary | ios::in);
 
 	if (_file->fail())
